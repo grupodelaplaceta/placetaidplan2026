@@ -268,10 +268,15 @@ function showSuccessScreen(dip) {
     // Display DIP
     DOM.dipDisplay.textContent = dip.toUpperCase();
     
-    // Show GIF animation, not Lottie
+    // Show GIF animations
     const gifAnimation = document.getElementById('gifAnimation');
     if (gifAnimation) {
         gifAnimation.style.display = 'block';
+    }
+
+    const gifAnimationDip = document.getElementById('gifAnimationDip');
+    if (gifAnimationDip) {
+        gifAnimationDip.style.display = 'block';
     }
 
     // Hide fallback and lottie containers
