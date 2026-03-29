@@ -64,7 +64,17 @@ plid/
 - `vercel env add API_BASE_URL production`
 - Consulteu `vercel env ls`
 
-## 🛡️ Responsabilitat
+## �️ Verificar uso de la DB real
+
+- La config de producció està en `backend/config.py`
+- `ProductionConfig.SQLALCHEMY_DATABASE_URI` usa `os.getenv('DATABASE_URL')`
+- Endpoint de salud: `GET /health`
+- Endpoint de usuarios (demo):
+  - `GET /users` -> lista ciudadanos
+  - `POST /users` -> crea ciudadano (payload: `{"dip_hash":"hash","status":"active"}`)
+- Endpoint de logs: `GET /audit-logs`
+
+## �🛡️ Responsabilitat
 
 No incloure secrets al frontend ni en commit. Utilitzeu `git-crypt` / `sops` / KeyVault per dades sensibles a CI/CD.
 
