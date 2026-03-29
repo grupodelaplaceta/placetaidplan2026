@@ -268,8 +268,22 @@ function showSuccessScreen(dip) {
     // Display DIP
     DOM.dipDisplay.textContent = dip.toUpperCase();
     
-    // Load Lottie animation
-    loadLottieAnimation();
+    // Show GIF animation, not Lottie
+    const gifAnimation = document.getElementById('gifAnimation');
+    if (gifAnimation) {
+        gifAnimation.style.display = 'block';
+    }
+
+    // Hide fallback and lottie containers
+    const fallback = document.getElementById('fallbackAnimation');
+    if (fallback) {
+        fallback.classList.remove('active');
+    }
+    const lottieContainer = document.getElementById('lottieAnimation');
+    if (lottieContainer) {
+        lottieContainer.style.display = 'none';
+    }
+
     
     console.log('✓ Success screen shown');
     
@@ -285,11 +299,20 @@ function showSuccessScreen(dip) {
  * Load Lottie animation
  */
 function loadLottieAnimation() {
+    const fallback = document.getElementById('fallbackAnimation');
+
     if (!window.lottie) {
-        console.warn('Lottie not loaded');
+        console.warn('Lottie not loaded, using fallback animation');
+        if (fallback) {
+            fallback.classList.add('active');
+        }
         return;
     }
-    
+
+    if (fallback) {
+        fallback.classList.remove('active');
+    }
+
     // Simple success animation data (circle checkmark)
     const animationData = {
         v: '5.5.0',
