@@ -3,18 +3,18 @@
  */
 
 const CONFIG = {
-    // API Configuration
-    API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:5000',
+    // API Configuration - Static deployment, no backend
+    API_BASE_URL: 'https://placetaidplan2026.vercel.app',
     API_TIMEOUT: 30000, // 30 seconds
-    
-    // OAuth Parameters (passed from backend)
+
+    // OAuth Parameters (passed from backend) - Demo mode
     OAUTH: {
-        clientId: new URLSearchParams(window.location.search).get('client_id') || '',
-        redirectUri: new URLSearchParams(window.location.search).get('redirect_uri') || '',
-        state: new URLSearchParams(window.location.search).get('state') || '',
+        clientId: new URLSearchParams(window.location.search).get('client_id') || 'demo-client',
+        redirectUri: new URLSearchParams(window.location.search).get('redirect_uri') || window.location.origin,
+        state: new URLSearchParams(window.location.search).get('state') || 'demo-state',
         scope: new URLSearchParams(window.location.search).get('scope') || 'openid profile'
     },
-    
+
     // DIP Configuration
     DIP: {
         segment1Length: 4,
