@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#2C5282">
     <title>PlacetaID - Autenticación Segura</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.5/lottie.min.js"></script>
+    <!-- Producción: evitar recursos externos de terceros (CSP/tracking) -->
+    <!-- Lottie se mantiene local o se usa animación CSS en caso de bloqueo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -362,14 +363,72 @@
             height: 140px;
             margin: 0 auto 24px auto;
             display: block;
+            position: relative;
         }
 
-        .gif-animation img {
+        .pulse-circle,
+        .pulse-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            transform: translateZ(0);
+        }
+
+        .pulse-circle {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid var(--success-color);
+            background: linear-gradient(135deg, #22c55e, #a855f7);
+            box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+            animation: pulse 1.2s infinite;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .pulse-ring {
+            width: 100%;
+            height: 100%;
+            border: 4px solid rgba(165, 96, 245, 0.5);
+            animation: pulse-ring 1.6s infinite;
+        }
+
+        .shield-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield {
+            width: 72px;
+            height: 88px;
+            background: linear-gradient(135deg, #6d28d9, #9333ea);
+            clip-path: polygon(50% 0%, 90% 20%, 90% 65%, 50% 100%, 10% 65%, 10% 20%);
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .shield::after {
+            content: '';
+            position: absolute;
+            inset: 22px 0 0 0;
+            width: 30px;
+            height: 40px;
+            border-left: 6px solid #10b981;
+            border-bottom: 6px solid #10b981;
+            transform: rotate(-45deg);
+            left: calc(50% - 18px);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.94); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(56, 189, 248, 0); }
+            100% { transform: scale(0.94); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.7; }
+            70% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
         }
 
         .fallback-animation {
@@ -520,10 +579,13 @@
             <div id="successScreen" class="success-screen">
                 <div class="animation-container" id="lottieAnimation" style="display: none;"></div>
             <div class="gif-animation" id="gifAnimation">
-                <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Success" />
+                <div class="pulse-circle"></div>
+                <div class="pulse-ring"></div>
             </div>
             <div class="gif-animation" id="gifAnimationDip" style="display:none;">
-                <img src="https://media.giphy.com/media/3o7WIT31QDfKjelt8U/giphy.gif" alt="DIP Verified" />
+                <div class="shield-container">
+                    <div class="shield"></div>
+                </div>
             </div>
             <div class="fallback-animation" id="fallbackAnimation"></div>
                 <h2 class="success-title">¡Autenticación Exitosa!</h2>
@@ -545,8 +607,10 @@
             <a href="#" class="footer-link">Privacidad</a>
             <a href="#" class="footer-link">Términos</a>
             <a href="#" class="footer-link">Seguridad</a>
+            <a href="#" class="footer-link">Cookies</a>
             <a href="#" class="footer-link">Contacto</a>
             <p style="margin-top: 12px;">© 2026 PlacetaID. Todos los derechos reservados.</p>
+            <p style="font-size: 10px; color: #6B7280; margin-top: 8px; max-width: 420px;">Aval legal: PlacetaID es una plataforma de autenticación demo. En producción, implementa HTTPS forzado, CSP, manejo de sesiones seguras, rate limit, .env seguro, y conformidad con RGPD/LOPD. Usa proveedores certificados y revisa el contrato de servicio con usuario final.</p>
         </footer>
     </div>
 
