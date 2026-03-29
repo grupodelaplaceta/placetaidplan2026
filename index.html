@@ -610,7 +610,13 @@
             <a href="#" class="footer-link">Cookies</a>
             <a href="#" class="footer-link">Contacto</a>
             <p style="margin-top: 12px;">© 2026 PlacetaID. Todos los derechos reservados.</p>
-            <p style="font-size: 10px; color: #6B7280; margin-top: 8px; max-width: 420px;">Aval legal: PlacetaID es una plataforma de autenticación demo. En producción, implementa HTTPS forzado, CSP, manejo de sesiones seguras, rate limit, .env seguro, y conformidad con RGPD/LOPD. Usa proveedores certificados y revisa el contrato de servicio con usuario final.</p>
+            <section style="font-size: 11px; color: #6B7280; margin-top: 10px; line-height: 1.45; max-width: 640px; text-align: left;">
+                <p><strong>Aviso legal</strong>: PlacetaID es un sistema de autenticación seguro diseñado para proteger la identidad digital. Este sitio es una DEMO y no debe usarse en producción sin auditoría de seguridad.</p>
+                <p><strong>Política de privacidad</strong>: Sus datos personales se gestionan con privacidad de acuerdo a RGPD/LOPD. No compartimos información con terceros sin su consentimiento previo. La información de registro, DIP y códigos TOTP se procesan únicamente para la autenticación y se eliminan tras la sesión en escenarios reales.</p>
+                <p><strong>Cookies y rastreo</strong>: Aunque esta demo utiliza recursos locales, en producción configure cookie consent y deshabilite scripts de terceros sin permiso (CSP estricta). Se recomienda usar SameSite=Strict y Secure para cookies de sesión.</p>
+                <p><strong>Seguridad</strong>: En producción se exige HTTPS/TLS obligatorio, CORS permite solo orígenes confiables, protección CSRF, WAF, bloqueo de intentos fallidos, y rotación de claves. Use entorno seguro (`.env`) y no incluya credenciales en frontend. Realice pentests periódicos.</p>
+                <p><strong>Responsabilidad</strong>: El propietario de la plataforma es responsable del cumplimiento legal y de datos. Este repositorio es una base de implementación; su uso en producción requiere revisión jurídica y técnica según normativa local.</p>
+            </section>
         </footer>
     </div>
 
