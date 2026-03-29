@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#2C5282">
+    <title>PlacetaID - Autenticación Segura</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.5/lottie.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2C5282;
+            --success-color: #16A34A;
+            --error-color: #DC2626;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --border-color: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a3a52 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .container {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+            animation: slideInUp 400ms ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            padding: 40px 32px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .main {
+            padding: 40px 32px;
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+            border: none;
+            padding: 0;
+        }
+
+        .label-main {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            margin-top: 4px;
+        }
+
+        .dip-input {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .dip-input input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .dip-input input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(44, 82, 130, 0.02);
+            box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
+        }
+
+        .dip-input input.invalid {
+            border-color: var(--error-color);
+            background: rgba(220, 38, 38, 0.05);
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .dip-input input.valid {
+            border-color: var(--success-color);
+            background: rgba(22, 163, 74, 0.05);
+        }
+
+        .dip-input span {
+            color: var(--text-secondary);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .totp-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            letter-spacing: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .totp-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(44, 82, 130, 0.02);
+            box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
+        }
+
+        .totp-input.invalid {
+            border-color: var(--error-color);
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .totp-input.valid {
+            border-color: var(--success-color);
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a3a52 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(44, 82, 130, 0.4);
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-secondary);
+            border-color: var(--primary-color);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 16px 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideInUp 300ms ease-out;
+            font-size: 14px;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-error {
+            background: #FEE2E2;
+            border: 1px solid #FECACA;
+            color: #991B1B;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .success-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 32px;
+            text-align: center;
+            min-height: 500px;
+        }
+
+        .success-screen.active {
+            display: flex;
+        }
+
+        .animation-container {
+            width: 280px;
+            height: 280px;
+            margin-bottom: 32px;
+        }
+
+        .success-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .success-message {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 400px;
+        }
+
+        .dip-display {
+            background: var(--bg-secondary);
+            border: 2px solid var(--success-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .dip-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .dip-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--success-color);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .success-footer {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid var(--primary-color);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            background: var(--bg-secondary);
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                padding: 32px 24px;
+            }
+            .header {
+                padding: 32px 24px;
+            }
+            .dip-input {
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 0;
+                min-height: 100vh;
+            }
+            .header {
+                padding: 24px 16px;
+            }
+            .main {
+                padding: 24px 16px;
+            }
+            .logo {
+                font-size: 24px;
+            }
+            .title {
+                font-size: 18px;
+            }
+            .dip-input input {
+                font-size: 16px;
+            }
+            .totp-input {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+            .btn {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+        }
+
+        #alert-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">🔐 PlacetaID</div>
+            <h1 class="title">Autenticación Segura</h1>
+            <p class="subtitle">Sistema de Verificación Centralizado</p>
+        </header>
+
+        <main class="main">
+            <div id="alert-container"></div>
+
+            <!-- Main Login Form -->
+            <form id="login-form">
+                <!-- DIP Step -->
+                <div class="form-step active" id="dip-step">
+                    <div class="form-group">
+                        <label class="label-main">📋 Documento de Identidad (DIP)</label>
+                        <p class="form-hint">Ejemplo: 12345678X</p>
+                        <input type="text" id="dip-input" class="totp-input" maxlength="9" placeholder="12345678X" autocomplete="off">
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-primary" id="validate-dip-btn">Validar DIP</button>
+                    </div>
+                </div>
+
+                <!-- TOTP Step -->
+                <div class="form-step" id="totp-step">
+                    <div class="form-group">
+                        <label class="label-main">🔐 Código de Verificación (2FA)</label>
+                        <p class="form-hint">Ingresa el código de 6 dígitos de tu autenticador</p>
+                        <input type="text" id="totp-input" class="totp-input" maxlength="6" inputmode="numeric" placeholder="000000" autocomplete="off">
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-ghost" id="back-btn" class="hidden">← Atrás</button>
+                        <button type="button" class="btn btn-primary" id="validate-totp-btn">Verificar Código</button>
+                    </div>
+                </div>
+
+                <!-- Loading Step -->
+                <div class="form-step" id="loading-step">
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <div class="spinner" style="margin: 0 auto; margin-bottom: 20px;"></div>
+                        <p style="color: var(--text-secondary); font-size: 16px;">Completando autenticación...</p>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Success Screen -->
+            <div id="successScreen" class="success-screen">
+                <div class="animation-container" id="lottieAnimation"></div>
+                <h2 class="success-title">¡Autenticación Exitosa!</h2>
+                <p class="success-message">Tu identidad ha sido verificada de forma segura.</p>
+
+                <div class="dip-display">
+                    <div class="dip-label">Documento Verificado</div>
+                    <div class="dip-value" id="displayDIP">---.----.--</div>
+                </div>
+
+                <div class="success-footer">
+                    <p>Redirigiendo a tu aplicación <span class="spinner"></span></p>
+                    <p style="margin-top: 10px; font-size: 12px; opacity: 0.7;">Si no se redirige automáticamente, <a href="#" id="manualRedirectBtn" style="color: var(--primary-color); text-decoration: none;">haz clic aquí</a>.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <a href="#" class="footer-link">Privacidad</a>
+            <a href="#" class="footer-link">Términos</a>
+            <a href="#" class="footer-link">Seguridad</a>
+            <a href="#" class="footer-link">Contacto</a>
+            <p style="margin-top: 12px;">© 2026 PlacetaID. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="static/js/config.js"></script>
+    <script src="static/js/utils.js"></script>
+    <script src="static/js/api-client.js"></script>
+    <script src="static/js/login-enhanced.js"></script>
+</body>
+</html>
