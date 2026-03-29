@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PlacetaID - Panel de Control">
+    <meta name="theme-color" content="#2C5282">
+    <title>PlacetaID - Mi Cuenta</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header header-dashboard">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>PlacetaID</h1>
+                </div>
+                <nav class="nav-menu">
+                    <a href="#profile" class="nav-link active">Perfil</a>
+                    <a href="#security" class="nav-link">Seguridad</a>
+                    <a href="#2fa" class="nav-link">2FA</a>
+                    <button id="logout-btn" class="btn btn-ghost">Cerrar Sesión</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content dashboard-content">
+            <!-- Alert Section -->
+            <div id="alert-container"></div>
+
+            <!-- Profile Section -->
+            <section id="profile" class="dashboard-section">
+                <h2>Perfil de Usuario</h2>
+                <div class="profile-card">
+                    <div class="profile-info">
+                        <div class="info-group">
+                            <label>ID Ciudadano</label>
+                            <p id="citizen-id-display">-</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Estado de la Cuenta</label>
+                            <p id="account-status-display">-</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Rango de Edad</label>
+                            <p id="age-tier-display">-</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Miembro desde</label>
+                            <p id="created-at-display">-</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Último acceso</label>
+                            <p id="last-login-display">-</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Section -->
+            <section id="security" class="dashboard-section">
+                <h2>Seguridad</h2>
+                
+                <div class="security-card">
+                    <h3>Sesiones Activas</h3>
+                    <div id="sessions-list" class="sessions-list"></div>
+                    <p class="text-muted">Se muestran todas tus sesiones activas</p>
+                </div>
+
+                <div class="security-card">
+                    <h3>Actividad Reciente</h3>
+                    <div id="activity-list" class="activity-list"></div>
+                    <p class="text-muted">Últimas 5 actividades</p>
+                </div>
+            </section>
+
+            <!-- 2FA Section -->
+            <section id="2fa" class="dashboard-section">
+                <h2>Autenticación de Dos Factores (2FA)</h2>
+                
+                <div class="security-card">
+                    <div class="status-indicator" id="2fa-status">
+                        <span class="status-badge" id="2fa-badge">Desactivado</span>
+                    </div>
+
+                    <div id="2fa-disabled-content">
+                        <p>La autenticación de dos factores añade una capa extra de seguridad a tu cuenta.</p>
+                        <button id="enable-2fa-btn" class="btn btn-primary">
+                            Activar 2FA
+                        </button>
+                    </div>
+
+                    <div id="2fa-enabled-content" class="hidden">
+                        <p>Tu cuenta está protegida con autenticación de dos factores.</p>
+                        <button id="disable-2fa-btn" class="btn btn-destructive">
+                            Desactivar 2FA
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2FA Setup Modal -->
+                <div id="2fa-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Configurar Autenticación de Dos Factores</h3>
+                            <button class="modal-close" id="close-2fa-modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div id="2fa-setup-step-1" class="setup-step">
+                                <h4>Paso 1: Descarga una App Autenticadora</h4>
+                                <p>Descarga una de estas aplicaciones en tu dispositivo:</p>
+                                <ul>
+                                    <li>Google Authenticator</li>
+                                    <li>Microsoft Authenticator</li>
+                                    <li>Authy</li>
+                                    <li>FreeOTP</li>
+                                </ul>
+                                <button class="btn btn-primary" id="next-2fa-step-btn">Siguiente</button>
+                            </div>
+
+                            <div id="2fa-setup-step-2" class="setup-step hidden">
+                                <h4>Paso 2: Escanea el Código QR</h4>
+                                <p>Escanea este código QR con tu aplicación autenticadora:</p>
+                                <div id="qr-code-container" class="qr-container">
+                                    <img id="qr-code" src="" alt="QR Code">
+                                </div>
+                                <p class="text-small">O ingresa manualmente la clave:</p>
+                                <code id="totp-secret" class="secret-code"></code>
+                                <button class="btn btn-primary" id="next-2fa-verify-btn">Verificar</button>
+                            </div>
+
+                            <div id="2fa-setup-step-3" class="setup-step hidden">
+                                <h4>Paso 3: Verifica tu Código</h4>
+                                <p>Ingresa el código de 6 dígitos de tu aplicación autenticadora:</p>
+                                <input type="text" id="2fa-verify-code" class="form-input" maxlength="6" placeholder="000000" inputmode="numeric">
+                                <p class="text-small text-warning">⚠️ Guarda estos códigos de respaldo en un lugar seguro:</p>
+                                <div id="backup-codes" class="backup-codes"></div>
+                                <button class="btn btn-primary" id="confirm-2fa-btn">Confirmar y Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 PlacetaID - Sistema de Autenticación Centralizado</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/api-client.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

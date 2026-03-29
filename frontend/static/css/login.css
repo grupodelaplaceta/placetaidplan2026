@@ -1,0 +1,201 @@
+/* ========================================
+   PlacetaID - Login Page Styles
+   ======================================== */
+
+.login-wrapper {
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ========================================
+   DIP Input Animation
+   ======================================== */
+
+.dip-input {
+    transition: all 0.2s ease;
+}
+
+.dip-input:focus {
+    transform: translateY(-2px);
+}
+
+.dip-input.valid {
+    border-color: var(--success-color);
+    background-color: #f0fdf4;
+}
+
+.dip-input.invalid {
+    border-color: var(--error-color);
+    background-color: #fef2f2;
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ========================================
+   TOTP Input Animation
+   ======================================== */
+
+.totp-input {
+    letter-spacing: 0.3em;
+    font-size: 1.75rem;
+}
+
+.totp-input.valid {
+    border-color: var(--success-color);
+    background-color: #f0fdf4;
+}
+
+.totp-input.invalid {
+    border-color: var(--error-color);
+    background-color: #fef2f2;
+    animation: shake 0.3s ease-in-out;
+}
+
+/* ========================================
+   Form State Transitions
+   ======================================== */
+
+.form-step {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   Button Animations
+   ======================================== */
+
+#validate-dip-btn,
+#validate-totp-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+#validate-dip-btn::before,
+#validate-totp-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+#validate-dip-btn:active::before,
+#validate-totp-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* ========================================
+   Responsive Login
+   ======================================== */
+
+@media (max-width: 480px) {
+    .login-form {
+        padding: 1rem;
+    }
+
+    .dip-input {
+        font-size: 1rem;
+    }
+
+    .dip-input-group {
+        gap: 0.375rem;
+    }
+
+    .totp-input {
+        font-size: 1.5rem;
+        letter-spacing: 0.25em;
+    }
+}
+
+/* ========================================
+   Dark Mode Adjustments
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    .dip-input.valid {
+        background-color: rgba(72, 187, 120, 0.1);
+        border-color: var(--success-color);
+    }
+
+    .dip-input.invalid {
+        background-color: rgba(245, 101, 101, 0.1);
+        border-color: var(--error-color);
+    }
+
+    .totp-input.valid {
+        background-color: rgba(72, 187, 120, 0.1);
+        border-color: var(--success-color);
+    }
+
+    .totp-input.invalid {
+        background-color: rgba(245, 101, 101, 0.1);
+        border-color: var(--error-color);
+    }
+}
+
+/* ========================================
+   Loading and Success States
+   ======================================== */
+
+.form-step.loading {
+    pointer-events: none;
+}
+
+.form-step.success {
+    animation: successSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes successSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   Back Button Animation
+   ======================================== */
+
+#back-btn {
+    animation: slideIn 0.3s ease-out forwards;
+    margin-top: 1rem;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#back-btn:not(.hidden) {
+    display: flex;
+}

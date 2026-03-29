@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PlacetaID - Sistema de Autenticación Centralizado">
+    <meta name="theme-color" content="#2C5282">
+    <title>PlacetaID</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>PlacetaID</h1>
+                <p class="subtitle">Sistema de Autenticación Centralizado Seguro</p>
+            </div>
+        </header>
+
+        <main class="main-content index-main">
+            <section class="hero">
+                <h2>Autenticación Segura y Centralizada</h2>
+                <p>PlacetaID proporciona una puerta de autenticación centralizada para todas tus aplicaciones, con máxima seguridad y privacidad.</p>
+                
+                <div class="cta-buttons">
+                    <a href="/login.html" class="btn btn-primary">Iniciar Sesión</a>
+                    <a href="#about" class="btn btn-ghost">Más Información</a>
+                </div>
+            </section>
+
+            <section id="features" class="features-section">
+                <h2>Características de Seguridad</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Encriptación AES-256</h3>
+                        <p>Tus datos se encriptan con el estándar AES-256, el más seguro disponible.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔑</div>
+                        <h3>Autenticación de Dos Factores</h3>
+                        <p>Protección adicional con TOTP en tu dispositivo móvil.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Protección contra Ataques</h3>
+                        <p>Rate limiting y bloqueo automático de cuentas tras intentos fallidos.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3>Auditoría Completa</h3>
+                        <p>Registro detallado de todos los eventos de autenticación.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>OAuth2 Estándar</h3>
+                        <p>Compatible con cualquier aplicación moderna que use OAuth2.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Rendimiento Óptimo</h3>
+                        <p>Infraestructura serverless para máxima escalabilidad.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="about-section">
+                <h2>Acerca de PlacetaID</h2>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>¿Por qué PlacetaID?</h3>
+                        <p>PlacetaID es una solución de autenticación centralizada diseñada específicamente para garantizar la máxima seguridad de tus datos personales, especialmente tu número de identificación.</p>
+                        
+                        <h3>Seguridad por Diseño</h3>
+                        <ul>
+                            <li>Tu DIP nunca se transmite a terceros</li>
+                            <li>Encriptación de extremo a extremo</li>
+                            <li>Validación de checksum según algoritmo español</li>
+                            <li>2FA obligatoria para mayor protección</li>
+                            <li>Auditoría completa de accesos</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h4>256-bit</h4>
+                            <p>Encriptación</p>
+                        </div>
+                        <div class="stat">
+                            <h4>2FA</h4>
+                            <p>Autenticación</p>
+                        </div>
+                        <div class="stat">
+                            <h4>99.9%</h4>
+                            <p>Disponibilidad</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="security-section">
+                <h2>Cumplimiento Normativo</h2>
+                
+                <div class="compliance-grid">
+                    <div class="compliance-card">
+                        <h3>GDPR/RGPD</h3>
+                        <p>Cumplimiento total con la regulación europea de protección de datos.</p>
+                    </div>
+                    <div class="compliance-card">
+                        <h3>OAuth 2.0</h3>
+                        <p>Implementación estándar de OAuth 2.0 con RFC 6749.</p>
+                    </div>
+                    <div class="compliance-card">
+                        <h3>OWASP</h3>
+                        <p>Seguimiento de mejores prácticas de seguridad OWASP.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-section">
+                <h2>Preguntas Frecuentes</h2>
+                
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>¿Mis datos son seguros?</summary>
+                        <p>Sí. Tu información se encripta inmediatamente con AES-256 y se almacena de forma segura. Nunca se transmite a terceros sin tu consentimiento.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>¿Qué es 2FA?</summary>
+                        <p>La autenticación de dos factores añade una capa adicional de seguridad. Requiere algo que conoces (contraseña) y algo que tienes (código en tu teléfono).</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>¿Puedo usar PlacetaID con múltiples aplicaciones?</summary>
+                        <p>Sí. PlacetaID está diseñado como una puerta de autenticación centralizada. Usa tu mismo DIP para acceder a todas las aplicaciones asociadas.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>¿Qué hago si pierdo mi teléfono?</summary>
+                        <p>Si pierdes tu teléfono, puedes usar los códigos de respaldo que generamos durante la configuración de 2FA.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>¿Cuál es tu política de privacidad?</summary>
+                        <p>Tu privacidad es nuestra prioridad. Consulta nuestros <a href="/privacy.html">términos de privacidad</a> para más información.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="contact-section">
+                <h2>¿Necesitas Ayuda?</h2>
+                <p>Si tienes preguntas o problemas, no dudes en contactarnos.</p>
+                <div class="contact-buttons">
+                    <a href="mailto:support@placetaid.com" class="btn btn-primary">Email de Soporte</a>
+                    <a href="#" class="btn btn-ghost">Centro de Ayuda</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>PlacetaID</h4>
+                    <ul>
+                        <li><a href="/features">Características</a></li>
+                        <li><a href="/security">Seguridad</a></li>
+                        <li><a href="/about">Acerca de</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="/privacy.html">Privacidad</a></li>
+                        <li><a href="/terms.html">Términos</a></li>
+                        <li><a href="/cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Desarrollador</h4>
+                    <ul>
+                        <li><a href="/api">API</a></li>
+                        <li><a href="/docs">Documentación</a></li>
+                        <li><a href="/status">Estado del Servicio</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PlacetaID. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/js/index.js"></script>
+</body>
+</html>

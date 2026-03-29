@@ -1,0 +1,28 @@
+# PlacetaID Requirements for Vercel Serverless
+# Optimized for Vercel's Python 3.11 runtime
+
+Flask==2.3.3
+Flask-CORS==4.0.0
+Flask-SQLAlchemy==3.0.5
+Flask-JWT-Extended==4.5.2
+Flask-Migrate==4.0.5
+PyJWT==2.8.1
+PyMySQL==1.1.0
+psycopg2-binary==2.9.9
+cryptography==41.0.3
+python-dotenv==1.0.0
+pyotp==2.9.0
+redis==5.0.1
+Werkzeug==2.3.7
+
+# For production
+gunicorn==21.2.0
+
+# Optional: Error tracking
+sentry-sdk==1.38.0
+
+# Optional: Async support for better serverless performance
+asyncio==3.4.3
+
+# Optional: Database connection pooling for serverless
+sqlalchemy-utils==0.41.1
