@@ -4,21 +4,10 @@
   "github": {
     "silent": true
   },
-  "functions": {
-    "api/index.py": {
-      "runtime": "python3.9",
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.py"
+      "source": "/(.*)",
+      "destination": "/api/index.py"
     }
   ],
   "env": {

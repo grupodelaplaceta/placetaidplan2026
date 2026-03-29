@@ -1,6 +1,5 @@
 """
 PlacetaID - Vercel Serverless Entry Point
-Main wsgi handler for Vercel
 """
 
 import os
@@ -13,8 +12,7 @@ os.environ.setdefault('FLASK_ENV', 'production')
 
 from app import create_app
 
-# Configure for serverless environment
+# Create Flask app for Vercel
 app = create_app('production')
 
-# Vercel requires the app to be exported
-# This is the WSGI handler that Vercel will call
+# Vercel will automatically detect and use this Flask app
