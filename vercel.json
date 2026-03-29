@@ -5,8 +5,8 @@
     "silent": true
   },
   "functions": {
-    "api/**/*.py": {
-      "runtime": "python@3.11",
+    "api/index.py": {
+      "runtime": "python3.9",
       "memory": 1024,
       "maxDuration": 60
     }
