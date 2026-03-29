@@ -45,3 +45,26 @@ plid/
 5. Redirecció a web original amb Token
 6. Web valida token a backend de PlacetaID
 
+## 🔧 Configuració segura amb .env i Vercel
+
+- Crea `.env` a l'entorn local amb clau secretes i no la pujes a Git.
+- El projecte ja inclou `.env.example` amb els noms de variables.
+- Instala `dotenv-safe` (backend Node.js):
+  - `npm install dotenv-safe`
+  - `require('dotenv-safe').config();`
+- Exemple `package.json` scripts:
+  - `"start": "node server.js"`
+  - `"dev": "nodemon server.js"`
+
+## 📦 Deploy a Vercel (variables d'entorn)
+
+- `vercel env add DATABASE_URL production`
+- `vercel env add OAUTH_CLIENT_ID production`
+- `vercel env add OAUTH_CLIENT_SECRET production`
+- `vercel env add API_BASE_URL production`
+- Consulteu `vercel env ls`
+
+## 🛡️ Responsabilitat
+
+No incloure secrets al frontend ni en commit. Utilitzeu `git-crypt` / `sops` / KeyVault per dades sensibles a CI/CD.
+

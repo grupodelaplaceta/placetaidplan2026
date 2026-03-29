@@ -4,10 +4,11 @@
 
 const CONFIG = {
     // API Configuration - Static deployment, no backend
-    API_BASE_URL: 'https://placetaidplan2026.vercel.app',
+    // En producción, debe proveerse desde el backend (o inyección server-side) y NO hardcodear valores secret
+    API_BASE_URL: window.PLACETAID_CONFIG?.API_BASE_URL || 'https://placetaidplan2026.vercel.app',
     API_TIMEOUT: 30000, // 30 seconds
 
-    // OAuth Parameters (passed from backend) - Demo mode
+    // OAuth Parameters (pasados desde backend / query params) - Demo mode
     OAUTH: {
         clientId: new URLSearchParams(window.location.search).get('client_id') || 'demo-client',
         redirectUri: new URLSearchParams(window.location.search).get('redirect_uri') || window.location.origin,
