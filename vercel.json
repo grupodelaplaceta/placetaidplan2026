@@ -1,6 +1,6 @@
 {
   "buildCommand": "pip install -r requirements.txt",
-  "framework": "other",
+  "framework": "python",
   "github": {
     "silent": true
   },
