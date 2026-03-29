@@ -23,12 +23,12 @@
   ],
   "env": {
     "FLASK_ENV": "production",
-    "DATABASE_URL": "@database_url",
-    "JWT_SECRET_KEY": "@jwt_secret_key",
-    "MASTER_ENCRYPTION_KEY": "@master_encryption_key",
-    "DIP_HASH_SALT": "@dip_hash_salt",
-    "REDIS_URL": "@redis_url",
-    "ALLOWED_ORIGINS": "@allowed_origins"
+    "DATABASE_URL": "sqlite:///placetaid_demo.db",
+    "JWT_SECRET_KEY": "demo-jwt-secret-key-2026-placetaid",
+    "MASTER_ENCRYPTION_KEY": "demo-encryption-key-32-chars-long!!!",
+    "DIP_HASH_SALT": "demo-dip-hash-salt-secure-2026",
+    "REDIS_URL": "redis://localhost:6379/0",
+    "ALLOWED_ORIGINS": "https://placetaidplan2026.vercel.app,http://localhost:3000"
   }
 }
 
