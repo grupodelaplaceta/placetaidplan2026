@@ -7,7 +7,9 @@ const LoginState = {
     currentStep: 'dip',
     validatedDIP: null,
     isProcessing: false,
-    demoMode: false
+    demoMode: false,
+    failedAttempts: 0,
+    blocked: false
 };
 
 // DOM Elements
@@ -65,6 +67,7 @@ function cacheDOM() {
     DOM.lottieContainer = document.getElementById('lottieAnimation');
     DOM.dipDisplay = document.getElementById('displayDIP');
     DOM.alertContainer = document.getElementById('alert-container');
+    DOM.statusMessage = document.getElementById('statusMessage');
 }
 
 /**
@@ -155,11 +158,15 @@ async function handleValidateDIP() {
     
     // Validate format
     if (!validateDIPFormat(dip)) {
-        showAlert('❌ Formato inválido. Usa: 12345678X', 'error');
+        LoginState.failedAttempts += 1;
+        showMessage(`Intento ${LoginState.failedAttempts}/3: DIP inválido`, 'error');
         DOM.dipInput.classList.add('invalid');
         setTimeout(() => {
             DOM.dipInput.classList.remove('invalid');
         }, 500);
+        if (LoginState.failedAttempts >= 3) {
+            blockUser();
+        }
         return;
     }
     
@@ -197,11 +204,15 @@ async function handleValidateTOTP() {
     
     // Validate format
     if (totp.length !== 6 || !/^\d{6}$/.test(totp)) {
-        showAlert('❌ Código debe ser 6 dígitos', 'error');
+        LoginState.failedAttempts += 1;
+        showMessage(`Intento ${LoginState.failedAttempts}/3: Código TOTP inválido`, 'error');
         DOM.totpInput.classList.add('invalid');
         setTimeout(() => {
             DOM.totpInput.classList.remove('invalid');
         }, 500);
+        if (LoginState.failedAttempts >= 3) {
+            blockUser();
+        }
         return;
     }
     
@@ -434,6 +445,54 @@ function showAlert(message, type = 'info', duration = 5000) {
         setTimeout(() => {
             alert.remove();
         }, duration);
+    }
+}
+
+function showMessage(message, type = 'info', duration = 5000) {
+    const status = DOM.statusMessage;
+    if (!status) return;
+
+    status.textContent = message;
+    status.className = `status-message show status-${type}`;
+
+    if (type === 'error') {
+        status.style.background = 'linear-gradient(135deg, #dc2626, #7f1d1d)';
+    } else if (type === 'success') {
+        status.style.background = 'linear-gradient(135deg, #16a34a, #059669)';
+    } else if (type === 'warning') {
+        status.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+    } else {
+        status.style.background = 'linear-gradient(135deg, #6d28d9, #9333ea)';
+    }
+
+    status.style.display = 'block';
+
+    if (duration > 0) {
+        setTimeout(() => {
+            status.style.display = 'none';
+        }, duration);
+    }
+}
+
+function blockUser() {
+    LoginState.blocked = true;
+    LoginState.isProcessing = false;
+    DOM.validateDipBtn.disabled = true;
+    DOM.validateTotpBtn.disabled = true;
+
+    showMessage('⚠️ Usuario bloqueado tras 3 intentos fallidos. Intenta de nuevo más tarde.', 'error', 0);
+
+    // Optionally show the login form as disabled
+    const inputs = [DOM.dipInput, DOM.totpInput];
+    inputs.forEach(input => {
+        if (input) {
+            input.disabled = true;
+        }
+    });
+
+    // Add a visible class to highlight block state
+    if (DOM.form) {
+        DOM.form.classList.add('blocked');
     }
 }
 

@@ -256,6 +256,22 @@
             color: #991B1B;
         }
 
+        .status-message {
+            margin-bottom: 16px;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+            background: linear-gradient(135deg, #6d28d9, #9333ea);
+            text-align: center;
+            display: none;
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
         .form-step {
             display: none;
         }
@@ -462,6 +478,7 @@
 
         <main class="main">
             <div id="alert-container"></div>
+            <div id="statusMessage" class="status-message"></div>
 
             <!-- Main Login Form -->
             <form id="login-form">
